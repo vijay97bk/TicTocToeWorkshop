@@ -55,14 +55,14 @@ namespace TicTacToeGame
             if (makeAToss() == 1)
             {
                 Console.WriteLine(" Player wins a toss ");
-                while (win(letter) != true)
+                while (isWin(letter) != true)
                 {
                     Console.WriteLine(" Players Move ");
                     int indexPlayer = Convert.ToInt32(Console.ReadLine());
                     if (board[indexPlayer] == ' ')
                     {
                         board[indexPlayer] = letter[0];
-                        if (win(letter) == true)
+                        if (isWin(letter) == true)
                         {
                             Console.WriteLine(" Player Wins ");
                             Environment.Exit(0);
@@ -75,7 +75,7 @@ namespace TicTacToeGame
                     if (board[indexComputer] == ' ')
                     {
                         board[indexComputer] = letter[1];
-                        if (win(letter) == true)
+                        if (isWin(letter) == true)
                         {
                             Console.WriteLine(" Computer Wins ");
                             Environment.Exit(0);
@@ -88,14 +88,14 @@ namespace TicTacToeGame
             else
             {
                 Console.WriteLine(" Computer wins a toss ");
-                while (win(letter) != true)
+                while (isWin(letter) != true)
                 {
                     Console.WriteLine(" Computers Move ");
                     int indexComputer = rand.Next(1, 10);
                     if (board[indexComputer] == ' ')
                     {
                         board[indexComputer] = letter[1];
-                        if (win(letter) == true)
+                        if (isWin(letter) == true)
                         {
                             Console.WriteLine(" Computer Wins ");
                             Environment.Exit(0);
@@ -107,7 +107,7 @@ namespace TicTacToeGame
                     if (board[indexPlayer] == ' ')
                     {
                         board[indexPlayer] = letter[0];
-                        if (win(letter) == true)
+                        if (isWin(letter) == true)
                         {
                             Console.WriteLine(" Player Wins ");
                             Environment.Exit(0);
@@ -119,7 +119,7 @@ namespace TicTacToeGame
 
         }
 
-        public static bool win(char[] letter)
+        public static bool isWin(char[] letter)
         {
             return (board[1] == letter[0] && board[2] == letter[0] && board[3] == letter[0]) ||
                  (board[4] == letter[0] && board[5] == letter[0] && board[6] == letter[0]) ||
@@ -153,7 +153,7 @@ namespace TicTacToeGame
         static void Main(string[] args)
         {
             char[] letter = { 'X', 'O' };
-            Console.WriteLine(" Welcome to TicTacToe Game");
+            Console.WriteLine(" Welcome to Tic Tac Toe Game");
 
             // TicTacToe.chooseLetter(letter);   
             TicTacToe.makeAMove(letter);
