@@ -62,6 +62,13 @@ namespace TicTacToeGame
                     if (board[indexPlayer] == ' ')
                     {
                         board[indexPlayer] = letter[0];
+                        Console.WriteLine(" Corner Option: ");
+                        int option = Convert.ToInt32(Console.ReadLine());
+                        if (option == 1)
+                        {
+                            Console.WriteLine(" Move to availabel corner ");
+                            availabelCorners(letter);
+                        }
                         if (isWin(letter) == true)
                         {
                             Console.WriteLine(" Player Wins ");
@@ -81,7 +88,7 @@ namespace TicTacToeGame
                             Environment.Exit(0);
                         }
                     }
-                    showBoard();//showBoard
+                    showBoard();
                 }
 
             }
@@ -107,6 +114,13 @@ namespace TicTacToeGame
                     if (board[indexPlayer] == ' ')
                     {
                         board[indexPlayer] = letter[0];
+                        Console.WriteLine(" Corner Option: Yes or No ");
+                        int option = Convert.ToInt32(Console.ReadLine());
+                        if (option == 1)
+                        {
+                            Console.WriteLine(" Move to availabel corner ");
+                            availabelCorners(letter);
+                        }
                         if (isWin(letter) == true)
                         {
                             Console.WriteLine(" Player Wins ");
@@ -138,6 +152,15 @@ namespace TicTacToeGame
                  (board[3] == letter[1] && board[5] == letter[1] && board[7] == letter[1]);
         }
 
+        public static void availabelCorners(char[] letter)
+        {
+            Random rand = new Random();
+            if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' || board[9] == ' ')
+            {
+                int indexPlayer = Convert.ToInt32(Console.ReadLine());
+                board[indexPlayer] = letter[0];
+            }
+        }
         public static int makeAToss()
         {
             Random rand = new Random();
