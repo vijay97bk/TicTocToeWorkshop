@@ -2,7 +2,7 @@
 
 namespace TicTacToeGame
 {
-    class TicTactoe
+    class TicTacToe
     {
         public static string PLAYER_1;
         public const char LETTERX = 'X';
@@ -16,29 +16,29 @@ namespace TicTacToeGame
             }
         }
 
-        public static char chooseLetter(char letterPlayer, char letterComputer)
-        {
-            switch (letterPlayer)
-            {
-                case LETTERX:
-                    Console.WriteLine(" Player choose X Option ");
-                    break;
-                case LETTERO:
-                    Console.WriteLine("  Player choose O Option  ");
-                    break;
-            }
-
-            switch (letterComputer)
-            {
-                case LETTERX:
-                    Console.WriteLine(" Computer choose X Option ");
-                    break;
-                case LETTERO:
-                    Console.WriteLine(" Computer choose O Option  ");
-                    break;
-            }
-            return letterPlayer;
-        }
+        //public static char chooseLetter(char letter)
+        //{
+        //    switch (letter)
+        //   {
+        //        case LETTERX:
+        //            Console.WriteLine(" Player choose X Option ");
+        //            break;
+        //        case LETTERO:
+        //            Console.WriteLine("  Player choose O Option  ");
+        //            break;
+        //    }
+        // 
+        //    switch (letter)
+        //    {
+        //        case LETTERX:
+        //            Console.WriteLine(" Computer choose X Option ");
+        //            break;
+        //        case LETTERO:
+        //            Console.WriteLine(" Computer choose O Option  ");
+        //           break;
+        //    }
+        //    return letter;
+        //}
 
         public static void showBoard()
         {
@@ -48,42 +48,95 @@ namespace TicTacToeGame
 
         }
 
-        public static void makeAMove(char letterPlayer, char letterComputer)
+        public static void makeAMove(char[] letter)
         {
             char freeSpace = ' ';
             Random rand = new Random();
             if (makeAToss() == 1)
             {
-                Console.WriteLine(" Players Move ");
-                int indexPlayer = Convert.ToInt32(Console.ReadLine());
-                if (board[indexPlayer] == ' ')
+                Console.WriteLine(" Player wins a toss ");
+                while (win(letter) != true)
                 {
-                    board[indexPlayer] = letterPlayer;
-                }
-                Console.WriteLine(" Computers Move ");
-                int indexComputer = rand.Next(1, 10);
-                if (board[indexComputer] == ' ')
-                {
-                    board[indexComputer] = letterComputer;
-                }
+                    Console.WriteLine(" Players Move ");
+                    int indexPlayer = Convert.ToInt32(Console.ReadLine());
+                    if (board[indexPlayer] == ' ')
+                    {
+                        board[indexPlayer] = letter[0];
+                        if (win(letter) == true)
+                        {
+                            Console.WriteLine(" Player Wins ");
+                            Environment.Exit(0);
 
+                        }
+                    }
+                    showBoard();
+                    Console.WriteLine(" Computers Move ");
+                    int indexComputer = rand.Next(1, 10);
+                    if (board[indexComputer] == ' ')
+                    {
+                        board[indexComputer] = letter[1];
+                        if (win(letter) == true)
+                        {
+                            Console.WriteLine(" Computer Wins ");
+                            Environment.Exit(0);
+                        }
+                    }
+                    showBoard();
+                }
 
             }
-            else if (makeAToss() == 0)
+            else
             {
-                Console.WriteLine(" Computers Move ");
-                int indexComputer = rand.Next(1, 10);
-                if (board[indexComputer] == ' ')
+                Console.WriteLine(" Computer wins a toss ");
+                while (win(letter) != true)
                 {
-                    board[indexComputer] = letterComputer;
-                }
-                Console.WriteLine(" Players Move ");
-                int indexPlayer = Convert.ToInt32(Console.ReadLine());
-                if (board[indexPlayer] == ' ')
-                {
-                    board[indexPlayer] = letterPlayer;
+                    Console.WriteLine(" Computers Move ");
+                    int indexComputer = rand.Next(1, 10);
+                    if (board[indexComputer] == ' ')
+                    {
+                        board[indexComputer] = letter[1];
+                        if (win(letter) == true)
+                        {
+                            Console.WriteLine(" Computer Wins ");
+                            Environment.Exit(0);
+                        }
+                    }
+                    showBoard();
+                    Console.WriteLine(" Players Move ");
+                    int indexPlayer = Convert.ToInt32(Console.ReadLine());
+                    if (board[indexPlayer] == ' ')
+                    {
+                        board[indexPlayer] = letter[0];
+                        if (win(letter) == true)
+                        {
+                            Console.WriteLine(" Player Wins ");
+                            Environment.Exit(0);
+                        }
+                    }
+                    showBoard();
                 }
             }
+
+        }
+
+        public static bool win(char[] letter)
+        {
+            return (board[1] == letter[0] && board[2] == letter[0] && board[3] == letter[0]) ||
+                 (board[4] == letter[0] && board[5] == letter[0] && board[6] == letter[0]) ||
+                 (board[7] == letter[0] && board[8] == letter[0] && board[9] == letter[0]) ||
+                 (board[1] == letter[0] && board[4] == letter[0] && board[7] == letter[0]) ||
+                 (board[2] == letter[0] && board[5] == letter[0] && board[8] == letter[0]) ||
+                 (board[3] == letter[0] && board[6] == letter[0] && board[9] == letter[0]) ||
+                 (board[1] == letter[0] && board[5] == letter[0] && board[9] == letter[0]) ||
+                 (board[3] == letter[1] && board[5] == letter[1] && board[7] == letter[1]) ||
+                 (board[1] == letter[1] && board[2] == letter[1] && board[3] == letter[1]) ||
+                 (board[4] == letter[1] && board[5] == letter[1] && board[6] == letter[1]) ||
+                 (board[7] == letter[1] && board[8] == letter[1] && board[9] == letter[1]) ||
+                 (board[1] == letter[1] && board[4] == letter[1] && board[7] == letter[1]) ||
+                 (board[2] == letter[1] && board[5] == letter[1] && board[8] == letter[1]) ||
+                 (board[3] == letter[1] && board[6] == letter[1] && board[9] == letter[1]) ||
+                 (board[1] == letter[1] && board[5] == letter[1] && board[9] == letter[1]) ||
+                 (board[3] == letter[1] && board[5] == letter[1] && board[7] == letter[1]);
         }
 
         public static int makeAToss()
@@ -99,14 +152,11 @@ namespace TicTacToeGame
     {
         static void Main(string[] args)
         {
-            char letterComputer = 'O';
-            char letterPlayer = 'X';
+            char[] letter = { 'X', 'O' };
             Console.WriteLine(" Welcome to TicTacToe Game");
 
-            TicTactoe.chooseLetter(letterPlayer, letterComputer);
-
-            TicTactoe.makeAMove(letterPlayer, letterComputer);
-            TicTactoe.showBoard();
+            // TicTacToe.chooseLetter(letter);   
+            TicTacToe.makeAMove(letter);
 
 
         }
