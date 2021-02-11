@@ -58,7 +58,7 @@ namespace TicTacToeGame
             if (makeAToss() == 1)
             {
                 Console.WriteLine(" Player wins a toss ");
-                while (isWin(letter) != true)
+                while (board[1] == ' ' || board[2] == ' ' || board[3] == ' ' || board[4] == ' ' || board[5] == ' ' || board[6] == ' ' || board[7] == ' ' || board[8] == ' ' || board[9] == ' ')
                 {
                     Console.WriteLine(" Players Move ");
                     Console.WriteLine(" Choose option: ");
@@ -104,7 +104,7 @@ namespace TicTacToeGame
             else
             {
                 Console.WriteLine(" Computer wins a toss ");
-                while (isWin(letter) != true)
+                while (board[1] == ' ' || board[2] == ' ' || board[3] == ' ' || board[4] == ' ' || board[5] == ' ' || board[6] == ' ' || board[7] == ' ' || board[8] == ' ' || board[9] == ' ')
                 {
                     Console.WriteLine(" Computers Move ");
                     int indexComputer = rand.Next(1, 10);
@@ -177,7 +177,7 @@ namespace TicTacToeGame
 
         public static void availabelSides(char[] letter, int indexPlayer)
         {
-            if (board[2] == ' ' || board[4] == ' ' || board[6] == ' ' || board[8] == ' ')
+            if ((board[2] == ' ' || board[4] == ' ' || board[6] == ' ' || board[8] == ' ') && (board[1] != ' ' && board[3] != ' ' && board[7] != ' ' && board[9] != ' ' && board[5] != ' '))
             {
                 board[indexPlayer] = letter[0];
             }
@@ -185,7 +185,7 @@ namespace TicTacToeGame
 
         public static void availabelCentre(char[] letter)
         {
-            if (board[5] == ' ')
+            if (board[5] == ' ' && (board[1] != ' ' && board[3] != ' ' && board[7] != ' ' && board[9] != ' '))
             {
                 int indexPlayer = 5;
                 board[indexPlayer] = letter[0];
