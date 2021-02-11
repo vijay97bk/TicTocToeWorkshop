@@ -20,14 +20,15 @@ namespace TicTacToeGame
             }
         }
         /// <summary>
-        /// Choose a Letter fro player and computer
+        /// Choose a Letter for player and computer
         /// </summary>
         public static void chooseLetter()
         {
 
             Random rand = new Random();
             int letterComputer = rand.Next(0, 2);
-            Console.WriteLine(" Choose a Letter");
+            Console.WriteLine(" Choose a Letter ");
+            Console.WriteLine("Enter digit 0=X or 1=O");
             int letterPlayer = Convert.ToInt32(Console.ReadLine());
 
             switch (letterPlayer)
@@ -50,6 +51,16 @@ namespace TicTacToeGame
                     break;
             }
         }
+        /// <summary>
+        /// Show the Board
+        /// </summary>
+        public static void showBoard()
+        {
+            Console.WriteLine(" |" + board[1] + "   | " + board[2] + "  | " + board[3] + "  | ");
+            Console.WriteLine(" |" + board[4] + "   | " + board[5] + "  | " + board[6] + "  | ");
+            Console.WriteLine(" |" + board[7] + "   | " + board[8] + "  | " + board[9] + "  | ");
+
+        }
     }
     class Program
     {
@@ -58,6 +69,7 @@ namespace TicTacToeGame
             Console.WriteLine("Welcome to TicTacToe Game !");
             TicTactoe.createBoard();
             TicTactoe.chooseLetter();
+            TicTactoe.showBoard();
         }
     }
 }
