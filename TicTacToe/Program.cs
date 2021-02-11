@@ -50,6 +50,9 @@ namespace TicTacToeGame
 
         public static void makeAMove(char[] letter)
         {
+            const int CORNER = 1;
+            const int CENTRE = 2;
+            const int SIDES = 3;
             char freeSpace = ' ';
             Random rand = new Random();
             if (makeAToss() == 1)
@@ -58,25 +61,31 @@ namespace TicTacToeGame
                 while (isWin(letter) != true)
                 {
                     Console.WriteLine(" Players Move ");
+                    Console.WriteLine(" Choose option: ");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(" Make a move ");
                     int indexPlayer = Convert.ToInt32(Console.ReadLine());
-                    if (board[indexPlayer] == ' ')
+                    switch (option)
                     {
-                        board[indexPlayer] = letter[0];
-                        Console.WriteLine(" Corner Option: ");
-                        int option = Convert.ToInt32(Console.ReadLine());
-                        if (option == 1)
-                        {
+                        case SIDES:
+                            Console.WriteLine(" Move to availabel sides ");
+                            availabelSides(letter, indexPlayer);
+                            break;
+                        case CORNER:
                             Console.WriteLine(" Move to availabel corner ");
-                            availabelCorners(letter);
-                        }
-                        if (isWin(letter) == true)
-                        {
-                            Console.WriteLine(" Player Wins ");
-                            Environment.Exit(0);
-
-                        }
+                            availabelCorners(letter, indexPlayer);
+                            break;
+                        case CENTRE:
+                            Console.WriteLine(" Move to availabel centre ");
+                            availabelCentre(letter);
+                            break;
                     }
                     showBoard();
+                    if (isWin(letter) == true)
+                    {
+                        Console.WriteLine(" Player Wins ");
+                        Environment.Exit(0);
+                    }
                     Console.WriteLine(" Computers Move ");
                     int indexComputer = rand.Next(1, 10);
                     if (board[indexComputer] == ' ')
@@ -110,27 +119,33 @@ namespace TicTacToeGame
                     }
                     showBoard();
                     Console.WriteLine(" Players Move ");
+                    Console.WriteLine(" Choose option: ");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(" Make a move ");
                     int indexPlayer = Convert.ToInt32(Console.ReadLine());
-                    if (board[indexPlayer] == ' ')
+                    switch (option)
                     {
-                        board[indexPlayer] = letter[0];
-                        Console.WriteLine(" Corner Option: Yes or No ");
-                        int option = Convert.ToInt32(Console.ReadLine());
-                        if (option == 1)
-                        {
+                        case SIDES:
+                            Console.WriteLine(" Move to availabel sides ");
+                            availabelSides(letter, indexPlayer);
+                            break;
+                        case CORNER:
                             Console.WriteLine(" Move to availabel corner ");
-                            availabelCorners(letter);
-                        }
-                        if (isWin(letter) == true)
-                        {
-                            Console.WriteLine(" Player Wins ");
-                            Environment.Exit(0);
-                        }
+                            availabelCorners(letter, indexPlayer);
+                            break;
+                        case CENTRE:
+                            Console.WriteLine(" Move to availabel centre ");
+                            availabelCentre(letter);
+                            break;
                     }
                     showBoard();
+                    if (isWin(letter) == true)
+                    {
+                        Console.WriteLine(" Player Wins ");
+                        Environment.Exit(0);
+                    }
                 }
             }
-
         }
         public static bool isWin(char[] letter)
         {
@@ -152,15 +167,32 @@ namespace TicTacToeGame
                  (board[3] == letter[1] && board[5] == letter[1] && board[7] == letter[1]);
         }
 
-        public static void availabelCorners(char[] letter)
+        public static void availabelCorners(char[] letter, int indexPlayer)
         {
-            Random rand = new Random();
             if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' || board[9] == ' ')
             {
-                int indexPlayer = Convert.ToInt32(Console.ReadLine());
                 board[indexPlayer] = letter[0];
             }
         }
+
+        public static void availabelSides(char[] letter, int indexPlayer)
+        {
+            if (board[2] == ' ' || board[4] == ' ' || board[6] == ' ' || board[8] == ' ')
+            {
+                board[indexPlayer] = letter[0];
+            }
+        }
+
+        public static void availabelCentre(char[] letter)
+        {
+            if (board[5] == ' ')
+            {
+                int indexPlayer = 5;
+                board[indexPlayer] = letter[0];
+            }
+        }
+
+
         public static int makeAToss()
         {
             Random rand = new Random();
