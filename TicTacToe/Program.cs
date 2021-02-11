@@ -93,7 +93,7 @@ namespace TicTacToeGame
             char letterPlayer = Console.ReadLine()[0];
             TicTactoe.chooseLetter(letterPlayer, letterComputer[i]);
 
-            TicTactoe.makeAMove(letterPlayer);
+            TicTactoe.makeAMove(letterPlayer);//Make Moves
             TicTactoe.showBoard();
         }
     }
